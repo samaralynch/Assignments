@@ -1,0 +1,12 @@
+SELECT (name) FROM language;
+SELECT (name) FROM language ORDER BY name ASC;
+SELECT * FROM actor;
+SELECT * FROM actor AS actor_name WHERE CONCAT(actor_id, first_name, last_name);
+SELECT * FROM actor WHERE last_name LIKE '%BER%' ORDER BY first_name;
+SELECT (last_name) FROM actor HAVING COUNT(last_name) > 1;
+SELECT COUNT(title) FROM film WHERE title='%Crododile%' AND title='%Shark%';
+SELECT * FROM film_category WHERE COUNT(film_id=40-60);
+SELECT first_name, last_name FROM actor WHERE (first_name) LIKE (SELECT (first_name) FROM actor WHERE actor_id = '24');
+SELECT (first_name) FROM actor WHERE actor_id = (SELECT (actor_id) FROM film_actor ORDER BY last_name LIMIT 1); 
+SELECT (film_category) FROM film WHERE (SELECT AVG(length) FROM film) > ALL (SELECT AVG(length) FROM film);
+SELECT * store_id, address_id FROM payment, store WHERE amount GROUP BY address_id;

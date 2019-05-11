@@ -1,0 +1,13 @@
+SELECT name FROM language;
+SELECT name FROM language ORDER BY name ASC;
+SELECT * FROM actor;
+SELECT * FROM actor AS actor_name WHERE CONCAT(actor_id, first_name, last_name);
+SELECT first_name, last_name FROM actor WHERE last_name LIKE '%BER%' ORDER BY first_name;
+SELECT COUNT(last_name) FROM actor GROUP BY last_name HAVING COUNT(*) < 2;
+SELECT COUNT(description) FROM film WHERE description LIKE '%Crododile%' OR description LIKE '%Shark%';
+SELECT first_name, last_name FROM actor WHERE actor_id IN(SELECT actor_id FROM film_actor WHERE film_id IN(SELECT film_id FROM film WHERE description LIKE '%Crododile%' OR description LIKE '%Shark%')) ORDER BY last_name; 
+SELECT COUNT(*) FROM film_category WHERE film_id < 40 AND film_id < 60;
+SELECT first_name, last_name FROM actor WHERE (first_name) LIKE (SELECT (first_name) FROM actor WHERE actor_id = '24');
+SELECT first_name, last_name FROM actor WHERE actor_id = (SELECT MAX(actor_id) FROM film_actor ORDER BY last_name LIMIT 1); 
+SELECT (film_category) FROM film WHERE (SELECT AVG(length) FROM film) > ALL (SELECT AVG(length) FROM film);
+SELECT store.store_id, sum(amount) FROM store inner join staff on store.store_id = staff.staff_id inner join payment p on p.staff_id = staff.staff_id GROUP BY store.store_id ORDER BY sum(amount);
